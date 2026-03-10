@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editor de Histórias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    ✍️ Editor de Histórias
+</header>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>Ferramentas</h3>
+        <button onclick="salvarHistoria()">💾 Salvar História</button>
+        <button onclick="salvarCapitulo()">💾 Salvar Capítulo</button>
+        <button onclick="listarHistorias()">📂 Minhas Histórias</button>
+    </div>
+
+    <div class="editor">
+        <textarea id="texto" placeholder="Escreva aqui seu texto..."></textarea>
+
+        <div class="resultado" id="resultado">
+            Resultado aparecerá aqui...
+        </div>
+
+        <div class="listas">
+            <div id="historiasList"></div>
+            <div id="capitulosList"></div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
