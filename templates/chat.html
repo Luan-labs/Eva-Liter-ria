@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>IA para Escritores</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+📚 IA para Escritores
+</header>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Ferramentas</h3>
+    <button onclick="gerarIdeia()">💡 Ideia</button>
+    <button onclick="criarPersonagem()">🎭 Personagem</button>
+    <button onclick="continuar()">✍️ Continuar</button>
+    <button onclick="revisar()">📝 Revisar</button>
+    <button onclick="traduzir()">🌎 Traduzir</button>
+    <button onclick="salvarHistoria()">💾 Salvar História</button>
+    <button onclick="salvarCapitulo()">💾 Salvar Capítulo</button>
+    <button onclick="listarHistorias()">📂 Minhas Histórias</button>
+    <button onclick="pausarDigitar()">⏸ Pause</button>
+    <button onclick="continuarDigitar()">▶ Continuar</button>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="editor">
+    <h2>Editor</h2>
+    <textarea id="texto" placeholder="Comece a escrever sua história..."></textarea>
+
+    <div class="actions">
+      <button onclick="continuar()">Continuar história</button>
+      <button onclick="revisar()">Revisar texto</button>
+      <button onclick="traduzir()">Traduzir</button>
+      <button onclick="pausarDigitar()">⏸ Pause</button>
+      <button onclick="continuarDigitar()">▶ Continuar</button>
+    </div>
+
+    <div class="resultado" id="resultado">
+      Resultado da IA aparecerá aqui...
+    </div>
+
+    <div class="listas">
+      <div id="historiasList"></div>
+      <div id="capitulosList"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
