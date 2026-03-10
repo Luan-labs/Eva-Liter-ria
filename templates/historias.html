@@ -1,0 +1,57 @@
+<html>
+
+<body>
+
+<h2>Minhas Histórias</h2>
+
+<button onclick="novaHistoria()">Nova História</button>
+
+<div id="lista"></div>
+
+<script>
+
+fetch("/historias")
+.then(res => res.json())
+.then(data => {
+
+let html=""
+
+data.forEach(h=>{
+
+html += `
+<div>
+<b>${h.titulo}</b>
+<a href="/editor/${h.id}">Abrir</a>
+</div>
+`
+
+})
+
+document.getElementById("lista").innerHTML = html
+
+})
+
+function novaHistoria(){
+
+let titulo = prompt("Título da história")
+
+fetch("/salvar_historia",{
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+titulo:titulo
+})
+
+})
+.then(()=>location.reload())
+
+}
+
+</script>
+
+</body>
+
+</html>
