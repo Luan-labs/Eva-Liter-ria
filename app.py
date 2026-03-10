@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, jsonify, redirect, session
 import sqlite3
 from ai import perguntar  # Sua função que chama a API da Claude
+import os
+from flask import Flask
 
 app = Flask(__name__)
-app.secret_key = "segredo"
+app.secret_key = os.getenv("FLASK_SECRET_KEY")  # pega a chave do ambiente
 
 # =========================
 # BANCO DE DADOS
