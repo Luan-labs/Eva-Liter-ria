@@ -3,3 +3,5 @@ requests
 gunicorn
 werkzeug
 anthropic
+PyPDF2
+python-docx
