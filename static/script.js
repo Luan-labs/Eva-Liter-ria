@@ -1,354 +1,105 @@
-// ==========================
-// EFEITO DE DIGITAÇÃO
-// ==========================
+<!DOCTYPE html>
+<html lang="pt-br">
 
-function escreverComAnimacao(texto){
+<head>
+<meta charset="UTF-8">
+<title>Login - IA para Escritores</title>
 
-let resultado = document.getElementById("resultado")
+<style>
 
-resultado.innerHTML = ""
-
-let i = 0
-
-function digitar(){
-
-if(i < texto.length){
-
-let char = texto[i]
-
-if(char === "\n"){
-resultado.innerHTML += "<br>"
-}
-else if(char === " "){
-resultado.innerHTML += "&nbsp;"
-}
-else{
-resultado.innerHTML += char
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:linear-gradient(135deg,#3b82f6,#1e3a8a);
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-i++
-
-setTimeout(digitar,20)
-
+.card{
+    background:white;
+    padding:40px;
+    border-radius:10px;
+    width:320px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
+h2{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-digitar()
-
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
 
-
-// ==========================
-// CONTINUAR HISTÓRIA
-// ==========================
-
-function continuar(){
-
-let texto = document.getElementById("texto").value
-
-fetch("/continuar",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-texto:texto
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-escreverComAnimacao(data.response)
-
-})
-
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
 }
 
-
-// ==========================
-// REVISAR TEXTO
-// ==========================
-
-function revisar(){
-
-let texto = document.getElementById("texto").value
-
-fetch("/melhorar",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-texto:texto
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-escreverComAnimacao(data.response)
-
-})
-
+button:hover{
+    background:#1d4ed8;
 }
 
-
-// ==========================
-// TRADUZIR TEXTO
-// ==========================
-
-function traduzir(){
-
-let texto = document.getElementById("texto").value
-
-fetch("/traduzir_literal",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-texto:texto
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-escreverComAnimacao(data.response)
-
-})
-
+.register{
+    margin-top:15px;
+    text-align:center;
 }
 
-
-// ==========================
-// GERAR IDEIA
-// ==========================
-
-function gerarIdeia(){
-
-let tema = prompt("Tema da história:")
-
-if(!tema){
-return
+.register button{
+    background:#10b981;
 }
 
-fetch("/ideia",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-tema:tema
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-escreverComAnimacao(data.response)
-
-})
-
+.register button:hover{
+    background:#059669;
 }
 
+</style>
+</head>
 
-// ==========================
-// CRIAR PERSONAGEM
-// ==========================
+<body>
 
-function criarPersonagem(){
+<div class="card">
 
-let descricao = prompt("Descrição do personagem:")
+<h2>📚 IA para Escritores</h2>
 
-if(!descricao){
-return
-}
+<form method="POST" action="/login">
 
-fetch("/personagem",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-descricao:descricao
-})
-})
-.then(res=>res.json())
-.then(data=>{
+<input type="text" name="username" placeholder="Usuário" required>
 
-escreverComAnimacao(data.response)
+<input type="password" name="password" placeholder="Senha" required>
 
-})
+<button type="submit">Entrar</button>
 
-}
+</form>
 
+<div class="register">
 
-// ==========================
-// SALVAR HISTÓRIA
-// ==========================
+<form method="POST" action="/register">
 
-function salvarHistoria(){
+<input type="text" name="username" placeholder="Novo usuário" required>
 
-let titulo = prompt("Título da história:")
+<input type="password" name="password" placeholder="Nova senha" required>
 
-if(!titulo){
-return
-}
+<button type="submit">Criar conta</button>
 
-let conteudo = document.getElementById("texto").value
+</form>
 
-fetch("/salvar_historia",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-titulo:titulo,
-conteudo:conteudo
-})
-})
-.then(res=>res.json())
-.then(data=>{
+</div>
 
-alert(data.mensagem)
+</div>
 
-})
-
-}
-
-
-// ==========================
-// SALVAR CAPÍTULO
-// ==========================
-
-function salvarCapitulo(){
-
-let titulo = prompt("Título do capítulo:")
-
-if(!titulo){
-return
-}
-
-let historia_id = prompt("ID da história:")
-
-if(!historia_id){
-return
-}
-
-let conteudo = document.getElementById("texto").value
-
-fetch("/salvar_capitulo",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-historia_id:historia_id,
-titulo:titulo,
-conteudo:conteudo
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-alert(data.mensagem)
-
-})
-
-}
-
-
-// ==========================
-// LISTAR HISTÓRIAS
-// ==========================
-
-function listarHistorias(){
-
-fetch("/listar_historias")
-.then(res=>res.json())
-.then(data=>{
-
-let lista = document.getElementById("historiasList")
-
-if(!lista){
-return
-}
-
-lista.innerHTML = ""
-
-data.historias.forEach(h=>{
-
-let item = document.createElement("div")
-
-item.innerHTML = "📖 " + h.titulo
-
-item.onclick = function(){
-
-listarCapitulos(h.id)
-
-}
-
-lista.appendChild(item)
-
-})
-
-})
-
-}
-
-
-// ==========================
-// LISTAR CAPÍTULOS
-// ==========================
-
-function listarCapitulos(historia_id){
-
-fetch("/listar_capitulos",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-historia_id:historia_id
-})
-})
-.then(res=>res.json())
-.then(data=>{
-
-let lista = document.getElementById("capitulosList")
-
-if(!lista){
-return
-}
-
-lista.innerHTML = ""
-
-data.capitulos.forEach(c=>{
-
-let item = document.createElement("div")
-
-item.innerHTML = "📄 " + c.titulo
-
-item.onclick = function(){
-
-carregarCapitulo(c.conteudo)
-
-}
-
-lista.appendChild(item)
-
-})
-
-})
-
-}
-
-
-// ==========================
-// CARREGAR CAPÍTULO
-// ==========================
-
-function carregarCapitulo(conteudo){
-
-document.getElementById("texto").value = conteudo
-
-}
+</body>
+</html>
