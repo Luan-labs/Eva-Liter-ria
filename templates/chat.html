@@ -13,7 +13,6 @@
 
 <div class="container">
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <h3>Ferramentas</h3>
     <button onclick="gerarIdeia()">💡 Ideia</button>
@@ -21,14 +20,10 @@
     <button onclick="continuar()">✍️ Continuar</button>
     <button onclick="revisar()">📝 Revisar</button>
     <button onclick="traduzir()">🌎 Traduzir</button>
-    <button onclick="salvarHistoria()">💾 Salvar História</button>
-    <button onclick="salvarCapitulo()">💾 Salvar Capítulo</button>
-    <button onclick="listarHistorias()">📂 Minhas Histórias</button>
-    <button onclick="pausarDigitar()">⏸ Pause</button>
-    <button onclick="continuarDigitar()">▶ Continuar</button>
+    <button onclick="document.getElementById('fileInput').click()">📁 Upload Arquivo</button>
+    <input type="file" id="fileInput" style="display:none" onchange="uploadArquivo(event)">
   </div>
 
-  <!-- EDITOR -->
   <div class="editor">
     <h2>Editor</h2>
     <textarea id="texto" placeholder="Comece a escrever sua história..."></textarea>
@@ -37,22 +32,40 @@
       <button onclick="continuar()">Continuar história</button>
       <button onclick="revisar()">Revisar texto</button>
       <button onclick="traduzir()">Traduzir</button>
-      <button onclick="pausarDigitar()">⏸ Pause</button>
-      <button onclick="continuarDigitar()">▶ Continuar</button>
     </div>
 
     <div class="resultado" id="resultado">
       Resultado da IA aparecerá aqui...
-    </div>
-
-    <div class="listas">
-      <div id="historiasList"></div>
-      <div id="capitulosList"></div>
     </div>
   </div>
 
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+// Mesma função de upload
+function uploadArquivo(event){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.conteudo){
+            document.getElementById("texto").value = data.conteudo;
+            alert("Arquivo carregado com sucesso!");
+        } else {
+            alert(data.mensagem);
+        }
+    })
+    .catch(err => alert("Erro ao enviar arquivo."));
+}
+</script>
 </body>
 </html>
