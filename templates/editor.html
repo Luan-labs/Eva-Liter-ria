@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Editor de Histórias</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<title>IA para Escritores</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header>
-    ✍️ Editor de Histórias
-</header>
+
+<header>📚 IA para Escritores</header>
 
 <div class="container">
-    <div class="sidebar">
-        <h3>Ferramentas</h3>
-        <button onclick="salvarHistoria()">💾 Salvar História</button>
-        <button onclick="salvarCapitulo()">💾 Salvar Capítulo</button>
-        <button onclick="listarHistorias()">📂 Minhas Histórias</button>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Menus</h3>
+
+    <!-- Menu Literária -->
+    <button onclick="document.getElementById('literariaMenu').classList.toggle('show')">📖 Literária ▼</button>
+    <div id="literariaMenu" class="submenu" style="display:none; margin-bottom:10px;">
+      <button onclick="continuarHistoria()">✍️ Continuar</button>
+      <button onclick="revisarTexto()">📝 Revisar</button>
+      <button onclick="traduzirTexto()">🌎 Traduzir</button>
+      <button onclick="gerarIdeia()">💡 Ideia</button>
+      <button onclick="criarPersonagem()">🎭 Personagem</button>
+      <button onclick="salvarHistoria()">💾 Salvar História</button>
+      <button onclick="salvarCapitulo()">💾 Salvar Capítulo</button>
+      <input type="file" id="uploadLiteraria" onchange="uploadArquivo(event)">
     </div>
 
-    <div class="editor">
-        <textarea id="texto" placeholder="Escreva aqui seu texto..."></textarea>
-
-        <div class="resultado" id="resultado">
-            Resultado aparecerá aqui...
-        </div>
-
-        <div class="listas">
-            <div id="historiasList"></div>
-            <div id="capitulosList"></div>
-        </div>
+    <!-- Menu Engenharia de Textos -->
+    <button onclick="document.getElementById('engenhariaMenu').classList.toggle('show')">🛠 Engenharia de Textos ▼</button>
+    <div id="engenhariaMenu" class="submenu" style="display:none; margin-bottom:10px;">
+      <button onclick="reformatarTexto()">📝 Reformatar</button>
+      <button onclick="simplificarTexto()">⚡ Simplificar</button>
+      <button onclick="expandirTexto()">➕ Expandir</button>
+      <button onclick="resumirTexto()">🗜 Resumir</button>
+      <input type="file" id="uploadEngenharia" onchange="uploadArquivo(event)">
     </div>
+
+    <!-- Controle digitação -->
+    <button onclick="pausarDigitar()">⏸ Pausar</button>
+    <button onclick="continuarDigitar()">▶ Continuar</button>
+
+    <!-- Listas de histórias e capítulos -->
+    <button onclick="listarHistorias()">📂 Minhas Histórias</button>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="editor">
+    <h2>Editor de Texto</h2>
+    <textarea id="texto" placeholder="Escreva aqui sua história ou análise..."></textarea>
+
+    <div class="resultado" id="resultado">Resultado da IA aparecerá aqui...</div>
+
+    <div class="listas">
+      <div id="historiasList"></div>
+      <div id="capitulosList"></div>
+    </div>
+  </div>
+
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+// Mostrar / ocultar submenu
+document.querySelectorAll('.sidebar button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        const submenu = btn.nextElementSibling;
+        if(submenu && submenu.classList.contains('submenu')){
+            submenu.style.display = (submenu.style.display === 'none') ? 'block' : 'none';
+        }
+    });
+});
+</script>
+
 </body>
 </html>
