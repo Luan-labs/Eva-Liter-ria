@@ -1,208 +1,161 @@
 /* RESET */
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 /* BODY */
-
 body{
-background:#f1f5f9;
-color:#1e293b;
+    background:#f1f5f9;
+    color:#1e293b;
 }
 
 /* HEADER */
-
 header{
-background:#1e293b;
-color:white;
-padding:15px;
-font-size:22px;
-font-weight:bold;
-text-align:center;
+    background:#1e293b;
+    color:white;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
 }
 
 /* CONTAINER */
-
 .container{
-display:flex;
-height:calc(100vh - 60px);
+    display:flex;
+    height:calc(100vh - 60px);
 }
 
 /* SIDEBAR */
-
 .sidebar{
-width:220px;
-background:#0f172a;
-color:white;
-padding:20px;
+    width:220px;
+    background:#0f172a;
+    color:white;
+    padding:20px;
 }
 
 .sidebar h3{
-margin-bottom:15px;
+    margin-bottom:15px;
 }
 
 .sidebar button{
-width:100%;
-margin-bottom:10px;
-padding:10px;
-border:none;
-border-radius:6px;
-background:#334155;
-color:white;
-cursor:pointer;
-transition:0.2s;
+    width:100%;
+    margin-bottom:8px;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    background:#334155;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+    text-align:left;
 }
 
 .sidebar button:hover{
-background:#475569;
+    background:#475569;
+}
+
+/* Submenu */
+.submenu{
+    margin-left:10px;
+    margin-bottom:10px;
+}
+
+.submenu button{
+    background:#475569;
+    font-size:14px;
+    padding:8px;
+}
+
+.submenu button:hover{
+    background:#5c6a85;
+}
+
+/* File input */
+.submenu input[type="file"]{
+    margin-top:5px;
+    width:95%;
 }
 
 /* EDITOR */
-
 .editor{
-flex:1;
-padding:20px;
-display:flex;
-flex-direction:column;
+    flex:1;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
 }
 
 .editor h2{
-margin-bottom:10px;
+    margin-bottom:10px;
 }
 
 /* TEXTAREA */
-
 textarea{
-width:100%;
-height:60vh;
-padding:15px;
-font-size:16px;
-border-radius:8px;
-border:1px solid #cbd5e1;
-resize:none;
-outline:none;
+    width:100%;
+    height:60vh;
+    padding:15px;
+    font-size:16px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    resize:none;
+    outline:none;
 }
 
 textarea:focus{
-border-color:#2563eb;
-}
-
-/* ACTION BUTTONS */
-
-.actions{
-margin-top:10px;
-}
-
-.actions button{
-margin-right:10px;
-padding:10px 15px;
-border:none;
-border-radius:6px;
-background:#2563eb;
-color:white;
-cursor:pointer;
-transition:0.2s;
-}
-
-.actions button:hover{
-background:#1d4ed8;
+    border-color:#2563eb;
 }
 
 /* RESULT AREA */
-
 .resultado{
-margin-top:20px;
-background:white;
-padding:15px;
-border-radius:8px;
-border:1px solid #e2e8f0;
-max-height:200px;
-overflow:auto;
+    margin-top:15px;
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+    max-height:200px;
+    overflow:auto;
 }
 
-/* LOGIN CARD */
-
-.card{
-background:white;
-padding:40px;
-border-radius:10px;
-width:320px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-margin:auto;
-margin-top:120px;
+/* LISTAS */
+.listas{
+    margin-top:15px;
 }
 
-.card h2{
-text-align:center;
-margin-bottom:25px;
+.listas div{
+    background:#fff;
+    padding:8px;
+    border-radius:6px;
+    margin-bottom:5px;
+    cursor:pointer;
+    border:1px solid #cbd5e1;
+    transition:0.2s;
 }
 
-/* INPUTS */
-
-input{
-width:100%;
-padding:10px;
-margin-bottom:15px;
-border:1px solid #cbd5e1;
-border-radius:6px;
-}
-
-/* BUTTON */
-
-button{
-width:100%;
-padding:10px;
-border:none;
-border-radius:6px;
-background:#2563eb;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-/* REGISTER SECTION */
-
-.register{
-margin-top:15px;
-text-align:center;
-}
-
-.register button{
-background:#10b981;
-}
-
-.register button:hover{
-background:#059669;
+.listas div:hover{
+    background:#e2e8f0;
 }
 
 /* MOBILE */
-
 @media (max-width:768px){
-
-.container{
-flex-direction:column;
-}
-
-.sidebar{
-width:100%;
-display:flex;
-overflow-x:auto;
-}
-
-.sidebar button{
-margin-right:10px;
-}
-
-textarea{
-height:50vh;
-}
-
+    .container{
+        flex-direction:column;
+    }
+    .sidebar{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+    }
+    .sidebar button{
+        flex:1 1 auto;
+        margin-right:5px;
+        margin-bottom:5px;
+    }
+    .submenu{
+        margin-left:0;
+    }
+    textarea{
+        height:50vh;
+    }
 }
